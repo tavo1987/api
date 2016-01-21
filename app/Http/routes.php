@@ -11,10 +11,7 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
-});
+$app->get('/api/public/clientes', 'ClienteController@index');
+$app->get('/api/public/clientes/{id}', 'ClienteController@show');
 
-$app->get('/test', function () use ($app) {
-    return 'test';
-});
+
