@@ -11,9 +11,17 @@
 |
 */
 
-$factory->define(App\User::class, function ($faker) {
+$factory->define(App\Cliente::class, function ($faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
+        'evento' => $faker->company,
+        'nombre' => $faker->name,
+        'apellido' => $faker->lastName,
+        'mail' => $faker->email,
+        'telefono'=> $faker->phoneNumber,
+        'celular' => $faker->phoneNumber,
+        'ciudad' => $faker->phoneNumber,
+        'info'=> $faker->randomElement(['si','si','no']),
+        'comentarios'=> $faker->sentence(6),
+        'fecha_ingreso' => $faker->date($format = 'Y-m-d', $max = 'now')
     ];
 });
