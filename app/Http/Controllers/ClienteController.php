@@ -9,11 +9,18 @@ use App\Cliente;
 class ClienteController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('oauth',['except'=> ['index']]);
+
+    }
+
+
     public function index()
     {
         $cliente = Cliente::all();
 
-        return $this->suceess($cliente,200);
+        return $this->success($cliente,200);
     }
 
 
@@ -23,7 +30,7 @@ class ClienteController extends Controller
 
         if($cliente)
         {
-            return $this->suceess($cliente,200);
+            return $this->success($cliente,200);
         }else{
             return $this->error('cliente no encontrado',404);
         }
