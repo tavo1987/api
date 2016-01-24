@@ -14,9 +14,11 @@ class DatabaseSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Cliente::Truncate();
+        DB::table('oauth_clients')->truncate();
 
 
         factory(Cliente::class,100)->create();
-        // $this->call('UserTableSeeder');
+
+        $this->call('OAuthClientSeeder');
     }
 }
