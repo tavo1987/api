@@ -6,8 +6,9 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/lumen-framework": "5.2.*",
-        "vlucas/phpdotenv": "~2.2"
+        "laravel/lumen-framework": "5.1.*",
+        "vlucas/phpdotenv": "~2.2",
+        "optimus/oauth2-server-lumen": "0.1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
