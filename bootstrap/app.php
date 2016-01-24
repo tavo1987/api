@@ -19,13 +19,16 @@ try {
 |
 */
 
+
 $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
- $app->withFacades();
+class_alias(Illuminate\Support\Facades\Config::class, 'Config');
 
- $app->withEloquent();
+$app->withFacades();
+
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -59,13 +62,19 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
+ $app->middleware([
 //    App\Http\Middleware\ExampleMiddleware::class
-// ]);
+      LucaDegasperi\OAuth2Server\Middleware\OAuthExceptionHandlerMiddleware::class
+ ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+ $app->routeMiddleware([
+     //   'auth' => App\Http\Middleware\Authenticate::class,
+     //    'check-authorization-params' => Optimus\OAuth2Server\Middleware\CheckAuthCodeRequestMiddleware::class,
+     'oauth' => Optimus\OAuth2Server\Middleware\OAuthMiddleware::class,
+ //    'oauth-owner' => Optimus\OAuth2Server\Middleware\OAuthOwnerMiddleware::class
+
+ ]);
+
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +90,8 @@ $app->singleton(
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class);
+$app->register(Optimus\OAuth2Server\OAuth2ServerServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
